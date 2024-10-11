@@ -21,6 +21,7 @@ Aplicação básica de Blockchain em Node.js, simulando a criação de transaç�
 Para iniciar a aplicação, utilize o comando:
    ```bash
    node main.js
+```
 
 ## Funcionalidades
 - Criação de transações e blocos: Transações podem ser agrupadas em blocos e adicionadas à blockchain.
@@ -28,6 +29,7 @@ Para iniciar a aplicação, utilize o comando:
 
 ## Exemplo
 
+```
 main.js
 const Blockchain = require('./blockchain');
 const Transaction = require('./transaction');
@@ -43,8 +45,11 @@ console.log("Criando bloco com as transações...");
 blockchain.addBlock();
 
 console.log(`Blockchain é válida? ${blockchain.isChainValid()}`);
+```
 
 ## Saída Esperada
+
+```
 PS C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic> cd C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic
 >> node main.js
 >>
@@ -71,6 +76,9 @@ Transação 2:
   Recebedor: 0x0001
   Quantidade: 10
 PS C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic>
+```
 
-## Licença
-Este projeto está licenciado sob a licença MIT
+
+
+
+
