@@ -12,7 +12,7 @@ Aplicação básica de Blockchain em Node.js, simulando a criação de transaç�
     npm install
 
 ## Estrutura do Projeto
-- **block.js**: Estrutura e métodos para cálculo do hash de cada bloco.
+- **block.js**: Estrutura e métodos para cálculo do hash de cada bloco e a mineração de blocos com Prova de Trabalho.
 - **transaction.js**: Estrutura das transações, incluindo remetente, destinatário e valor.
 - **blockchain.js**: Estrutura da blockchain, com funções de criação e validação da cadeia.
 - **main.js**: Arquivo principal para simulação da blockchain, onde a execução ocorre.
@@ -25,6 +25,7 @@ Para iniciar a aplicação, utilize o comando:
 
 ## Funcionalidades
 - Criação de transações e blocos: Transações podem ser agrupadas em blocos e adicionadas à blockchain.
+- Mineração de blocos com PoW : Os blocos são minerados antes de serem adicionados à blockchain, garantindo um hash que atende a um específico.
 - Verificação da integridade da blockchain: O sistema verifica se a cadeia é válida, garantindo a integridade dos dados.
 
 ## Exemplo
