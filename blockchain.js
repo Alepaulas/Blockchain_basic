@@ -5,10 +5,11 @@ class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.pendingTransactions = [];
+    this.difficulty = 2;
   }
 
   createGenesisBlock() {
-    return new Block(Date.now(), [], '0');
+    return new Block(Date.now(), [], '0', this.difficulty);
   }
 
   getLatestBlock() {
@@ -20,7 +21,8 @@ class Blockchain {
   }
 
   addBlock() {
-    const newBlock = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+    const newBlock = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash, this.difficulty);
+    newBlock.mineBlock();
     this.chain.push(newBlock);
     this.pendingTransactions = [];
   }
