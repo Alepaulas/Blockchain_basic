@@ -9,8 +9,8 @@ function main() {
   blockchain.createTransaction(new Transaction("0x0001", "0x0002", 5));
   blockchain.createTransaction(new Transaction("0x0002", "0x0001", 10));
 
-  console.log("Criando bloco com as transações...");
-  blockchain.addBlock();
+  console.log("Minerando bloco...");
+  blockchain.minePendingTransactions("0x0003");
 
   console.log(`Blockchain é válida? ${blockchain.isChainValid()}`);
   
@@ -19,6 +19,7 @@ function main() {
     console.log(`Hash: ${block.hash}`);
     console.log(`Hash Anterior: ${block.previousHash}`);
     console.log(`Timestamp: ${block.timestamp}`);
+    console.log('Nonce: ${block.nonce}')
     block.transactions.forEach((transaction, tIndex) => {
       console.log(`Transação ${tIndex + 1}:`);
       console.log(`  Enviador: ${transaction.sender}`);
