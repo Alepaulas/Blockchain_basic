@@ -5,7 +5,9 @@ class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.pendingTransactions = [];
+    this.balances = {};
     this.difficulty = 2;
+    this.minerReward = 50;
   }
 
   createGenesisBlock() {
@@ -17,16 +19,31 @@ class Blockchain {
   }
 
   createTransaction(transaction) {
+    if ((this.balances[transaction.sender] || 0) < transaction.amount + transaction.fee) {throw new Error('Saldo insuficiente para fazer a transação.');
+    }
     this.pendingTransactions.push(transaction);
   }
 
-  addBlock() {
-    const newBlock = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash, this.difficulty);
+  addBlock(minerAdress) {
+    const totalFees = this.pendingTransactions.reduce((sum, tx) => sum+tx.fee, 0);
+
+    const newBlock = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash, this.difficulty, this.minerReward, totalFees);
     newBlock.mineBlock();
     this.chain.push(newBlock);
+    this.updateBalances(newBlock, minerAddress);
     this.pendingTransactions = [];
   }
-
+  updateBalances(block, minerAddress) {
+    block.transactions.forEach(tx => {
+      this.balances[tx.sender] = (this.balances[tx.sender] || 0) - (tx.amount + tx.fee);
+      this.balances[tx.receiver] = (this.balances[tx.receiver] || 0) + tx.amount;
+    }); this.balances[minerAddress] = (this.balances[minerAddress] || 0) + block.minerReward;
+  }
+  resolveConflicts(newChain) {
+    if (newChain.length > this.chain.length) {
+      this.chain = newChain;
+    }
+  }
   isChainValid() {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
