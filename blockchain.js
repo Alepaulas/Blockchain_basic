@@ -24,7 +24,7 @@ class Blockchain {
     this.pendingTransactions.push(transaction);
   }
 
-  addBlock(minerAdress) {
+  addBlock(minerAddress) {
     const totalFees = this.pendingTransactions.reduce((sum, tx) => sum+tx.fee, 0);
 
     const newBlock = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash, this.difficulty, this.minerReward, totalFees);
