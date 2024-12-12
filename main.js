@@ -30,7 +30,7 @@ function main() {
   
   console.log("\nExibindo detalhes da cadeia no nó 1:");
 
-  blockchain.chain.forEach((block, index) => {
+  blockchain1.chain.forEach((block, index) => {
     console.log(`\nBloco ${index + 1}`);
     console.log(`Hash: ${block.hash}`);
     console.log(`Hash Anterior: ${block.previousHash}`);
