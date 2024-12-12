@@ -37,7 +37,9 @@ class Blockchain {
     block.transactions.forEach(tx => {
       this.balances[tx.sender] = (this.balances[tx.sender] || 0) - (tx.amount + tx.fee);
       this.balances[tx.receiver] = (this.balances[tx.receiver] || 0) + tx.amount;
-    }); this.balances[minerAddress] = (this.balances[minerAddress] || 0) + block.minerReward;
+    });
+    const totalFees = block.transactions.reduce((sum, tx) => sum + tx.fee, 0);
+    this.balances[minerAddress] = (this.balances[minerAddress] || 0) + block.minerReward + totalFees;
   }
   resolveConflicts(newChain) {
     if (newChain.length > this.chain.length) {
