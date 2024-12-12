@@ -1,5 +1,11 @@
 # Blockchain_basic
-Aplicação básica de Blockchain em Node.js, simulando a criação de transações, inclusão em blocos e verificação de integridade da cadeia.
+## Funcionalidades
+- **Criação de transações e blocos**;
+- **Mineração de blocos com PoW**;
+- **Controle de saldos**;
+- **Recompensas e taxas de transação**;
+- **Propagação de blocos e resolução de conflitos**;
+- **Verificação da integridade da blockchain**;
 
 ## Pré-requisitos
 - **Node.js**: [Download aqui](https://nodejs.org/).
@@ -12,10 +18,10 @@ Aplicação básica de Blockchain em Node.js, simulando a criação de transaç�
     npm install
 
 ## Estrutura do Projeto
-- **block.js**: Estrutura e métodos para cálculo do hash de cada bloco.
-- **transaction.js**: Estrutura das transações, incluindo remetente, destinatário e valor.
-- **blockchain.js**: Estrutura da blockchain, com funções de criação e validação da cadeia.
-- **main.js**: Arquivo principal para simulação da blockchain, onde a execução ocorre.
+- **block.js**: Estrutura e métodos para cálculo do hash e a mineração com PoW com campos para recompensas e taxas.
+- **transaction.js**: Estrutura das transações, incluindo remetente, destinatário, valor e taxa de transação.
+- **blockchain.js**: Estrutura da blockchain, com funções de gerenciamento de saldos, validação das transações, adição de blocos e resolução de conflitos.
+- **main.js**: Arquivo principal para simulação da blockchain, onde a execução ocorre, criando transações, mineração e propagação de blocos e resolução de conflitos .
 
 ## Executando a Aplicação
 Para iniciar a aplicação, utilize o comando:
@@ -29,53 +35,39 @@ Para iniciar a aplicação, utilize o comando:
 
 ## Exemplo
 
-```
-main.js
+**```**javascript
+
 const Blockchain = require('./blockchain');
 const Transaction = require('./transaction');
 
 console.log("Iniciando Blockchain...");
 const blockchain = new Blockchain();
 
+console.log("Adicionando saldos iniciais...");
+blockchain1.balances["0x0001"] = 50; // Saldo inicial
+blockchain1.balances["0x0002"] = 20;
+
 console.log("Criando transações...");
-blockchain.createTransaction(new Transaction("0x0001", "0x0002", 5));
-blockchain.createTransaction(new Transaction("0x0002", "0x0001", 10));
+blockchain.createTransaction(new Transaction("0x0001", "0x0002", 10,0.5));
+blockchain.createTransaction(new Transaction("0x0002", "0x0001", 15,0.2));
 
-console.log("Criando bloco com as transações...");
-blockchain.addBlock();
+console.log("Minerando bloco...");
+blockchain.addBlock("0xMINERADOR1");
 
-console.log(`Blockchain é válida? ${blockchain.isChainValid()}`);
+console.log("Estado final dos saldos:");
+console.log(blockchain1.balances);
+
+**##** Saída Esperada
+
 ```
+Iniciando Blockchain... 
+Adicionando saldos iniciais... 
+Criando transações... 
+Minerando bloco... 
 
-## Saída Esperada
+Bloco minerado: 0000abcd1234...
 
-```
-PS C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic> cd C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic
->> node main.js
->>
-Iniciando Blockchain...
-Criando transações...
-Criando bloco com as transações...
-Blockchain é válida? true
-
-Bloco 1
-Hash: 2e07127cb65e3eca00819ded35463ad3fedce0c7c1fe93c8201ffa8b10303bdc
-Hash Anterior: 0
-Timestamp: 1728477118389
-
-Bloco 2
-Hash: 4e7fa2350359103c313a5b177ea7a2ff53953418bf340878040a27c00fe266d5
-Hash Anterior: 2e07127cb65e3eca00819ded35463ad3fedce0c7c1fe93c8201ffa8b10303bdc
-Timestamp: 1728477118389
-Transação 1:
-  Enviador: 0x0001
-  Recebedor: 0x0002
-  Quantidade: 5
-Transação 2:
-  Enviador: 0x0002
-  Recebedor: 0x0001
-  Quantidade: 10
-PS C:\Users\USER\Downloads\Blockchain_basic\Blockchain_basic>
+Estado final dos saldos: { "0x0001": 39.5, // Saldo reduzido por transações + taxas "0x0002": 30, // Recebeu 10 na transação "0x0003": 15, // Recebeu 15 na transação "0xMINERADOR1": 50.7 // Recompensa + taxas somadas }
 ```
 
 
