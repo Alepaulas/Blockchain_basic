@@ -69,8 +69,3 @@ Bloco minerado: 0000abcd1234...
 
 Estado final dos saldos: { "0x0001": 39.5, // Saldo reduzido por transações + taxas "0x0002": 30, // Recebeu 10 na transação "0x0003": 15, // Recebeu 15 na transação "0xMINERADOR1": 50.7 // Recompensa + taxas somadas }
 ```
-
-
-
-
-
