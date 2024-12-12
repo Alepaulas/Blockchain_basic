@@ -35,7 +35,7 @@ function main() {
     console.log(`Hash: ${block.hash}`);
     console.log(`Hash Anterior: ${block.previousHash}`);
     console.log(`Timestamp: ${block.timestamp}`);
-    console.log('Nonce: ${block.nonce}')
+    console.log(`Nonce: ${block.nonce}`);
     console.log(`Recompensa + Taxas: ${block.minerReward}`);
     block.transactions.forEach((transaction, tIndex) => {
       console.log(`Transação ${tIndex + 1}:`);
@@ -46,7 +46,11 @@ function main() {
     });
   });
   console.log("\nEstado final dos saldos no nó 1:");
-  console.log(blockchain1.balances);
+  console.log(
+    Object.fromEntries(
+      Object.entries(blockchain1.balances).map(([key, value]) => [key, value.toFixed(2)])
+    )
+  );
 }
 
 main();
