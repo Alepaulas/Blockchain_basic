@@ -7,11 +7,13 @@ class Block {
     this.previousHash = previousHash;
     this.nonce = 0;
     this.difficulty = difficulty;
+    this.minerReward = minerReward;
+    this.totalFees = totalFees;
     this.hash = this.calculateHash();
   }
 
   calculateHash() {
-    const data = this.previousHash + this.timestamp + JSON.stringify(this.transactions)+ this.nonce;
+    const data = this.previousHash + this.timestamp + JSON.stringify(this.transactions)+ this.nonce+this.minerReward+this.totalFees;
     return crypto.createHash('sha256').update(data).digest('hex');
 
 }
