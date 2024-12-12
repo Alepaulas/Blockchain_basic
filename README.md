@@ -1,4 +1,5 @@
-# Blockchain_basic
+# README
+## Blockchain_basic
 ## Funcionalidades
 - **Criação de transações e blocos**;
 - **Mineração de blocos com PoW**;
