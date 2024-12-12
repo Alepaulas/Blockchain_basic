@@ -11,7 +11,7 @@ class Blockchain {
   }
 
   createGenesisBlock() {
-    return new Block(Date.now(), [], '0', this.difficulty);
+    return new Block(Date.now(), [], '0', this.difficulty,0 , 0);
   }
 
   getLatestBlock() {
