@@ -19,11 +19,15 @@ class Blockchain {
   }
 
   createTransaction(transaction) {
-    if ((this.balances[transaction.sender] || 0) < transaction.amount + transaction.fee) {throw new Error('Saldo insuficiente para fazer a transação.');
+    const senderBalance = this.balances[transaction.sender] || 0;
+    if (senderBalance < transaction.amount + transaction.fee) {
+      throw new Error(
+        `Saldo insuficiente para realizar a transação. Saldo atual: ${senderBalance}, necessário: ${transaction.amount + transaction.fee}`
+      );
     }
     this.pendingTransactions.push(transaction);
-  }
-
+  }  
+  
   addBlock(minerAddress) {
     const totalFees = this.pendingTransactions.reduce((sum, tx) => sum+tx.fee, 0);
 
